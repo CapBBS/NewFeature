@@ -17,6 +17,8 @@ public class Constants {
     final static String HOST_ADRRESS = "192.168.49.1";
     static String CLIENT_ADRRESS = "";
     final static String NEW_MUSIC = "ggr";
-    final static String SEND_STATE = "music state";
     final static String SEND_STOP_PLAY = "stop play";
+    final static String SEND_MUSIC = "send music";
+    final static String SEND_STATE = "send state";
+    final static String SEND_POSITION = "send position";
 }

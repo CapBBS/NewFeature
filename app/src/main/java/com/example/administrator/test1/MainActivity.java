@@ -207,9 +207,7 @@ public class MainActivity extends ActivityGroup{
                 File file = new File(file_nm);
                 //mimage.setImageBitmap(getCircleBitmap(getAlbumArt(getApplicationContext(), file)));
                 sendtofile = file;
-                if(sService != null) {
-                    sService.sendMusic(file);
-                }
+
                 button1.setEnabled(true);
                 button2.setEnabled(true);
                 button3.setEnabled(true);
@@ -439,6 +437,11 @@ public class MainActivity extends ActivityGroup{
     }
 
     public void button1(View v){
+
+        if(sService != null) {
+            sService.sendMusic(sendtofile);
+            //sService.sendPosition(12321);
+        }
         if(music.isPlaying()){
 // 재생중이면 실행될 작업 (일시 정지)
             music.pause();
