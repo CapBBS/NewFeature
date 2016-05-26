@@ -95,13 +95,18 @@ public class ClientService extends IntentService {
 
                     if (state.equals(Constants.SEND_MUSIC)) {
 
+                        long fileLength = dis.readLong();
+                        long recvLength = 0;
+
                         FileOutputStream fos = new FileOutputStream(file);
                         BufferedOutputStream bos = new BufferedOutputStream(fos);
 
                         while (true) {
                             bytesRead = is.read(buffer, 0, buffer.length);
                             Log.i("TAG", String.valueOf(bytesRead) + " 바이트를 읽음");
-                            if ( bytesRead == -1 ) {
+                            recvLength += bytesRead;
+                            Log.i("TAG", fileLength + "  /  " + recvLength);
+                            if ( fileLength == recvLength ) {
                                 break;
                             }
                             bos.write(buffer, 0, bytesRead);
@@ -112,7 +117,6 @@ public class ClientService extends IntentService {
                         Log.i("Tag", "다받았다");
                         bos.close();
                         fos.close();
-
                         dis.close();
                     } else if (state.equals(Constants.SEND_POSITION) ) {
                         Log.i("TAG", dis.readInt() + "");

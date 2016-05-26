@@ -101,14 +101,14 @@ public class ServerService extends IntentService {
     public synchronized void sendMusic(File file) {
         try {
 
-            dos = new DataOutputStream(socket.getOutputStream());
-
             dos.writeUTF(Constants.SEND_MUSIC);
 
             byte[] buffer = new byte[4096 * 64];
 
             FileInputStream fis = new FileInputStream(file);
             BufferedInputStream bis = new BufferedInputStream(fis);
+
+            dos.writeLong(file.length());
 
             Log.i("TAG", "전송시작");
             while (true) {
@@ -124,7 +124,6 @@ public class ServerService extends IntentService {
 
             Log.i("TAG", "다보냄");
 
-            dos.close();
             bis.close();
             fis.close();
         } catch (IOException e) {
